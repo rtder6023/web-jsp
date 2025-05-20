@@ -48,7 +48,7 @@
 			<td><input type="date" name="saledate" value="<%= saledate %>"></td>
 		</tr>
 		<tr>
-			<td>도서</td>
+			<td>신청도서</td>
 			<td>
 				<select name="bcode">
 				<%
