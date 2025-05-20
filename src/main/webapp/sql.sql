@@ -88,12 +88,14 @@ ORDER BY SUM(b.price * s.amount) DESC;
 SELECT 
 		    	 '2019' || TO_CHAR(s.salecode, 'FM0000') 		AS 전표번호, 
 			     TO_CHAR(s.saledate, 'YYYY-MM-DD')       		AS 판매일자, 
-			     b.bname                                      AS 도서명, 
-			     TO_CHAR(b.price, 'FM999,999,999')            AS 도서가격, 
-			     s.amount 									AS 수량, 
-			     TO_CHAR(b.price * s.amount, 'FM999,999,999') AS 총판매금액, 
-			     c.comname 									AS 출판사명 
+			     b.bname                                      	AS 도서명, 
+			     TO_CHAR(b.price, 'FM999,999,999')            	AS 도서가격, 
+			     s.amount 										AS 수량, 
+			     TO_CHAR(b.price * s.amount, 'FM999,999,999') 	AS 총판매금액, 
+			     c.comname 										AS 출판사명 
 				 FROM sale_tbl s 
 				 JOIN book_tbl b ON s.bcode = b.bcode 
 				 JOIN company_tbl c ON b.comcode = c.comcode 
 				 ORDER BY s.salecode;
+				 
+delete from sale_tbl where salecode => 11;

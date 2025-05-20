@@ -21,5 +21,5 @@ String sql = " INSERT INTO sale_tbl VALUES ( 	" +
 		     " 								'" + amount   + "')";
 
 ResultSet rs = stmt.executeQuery(sql);
-response.sendRedirect("main.jsp");
+response.sendRedirect("insert_list.jsp");
 %>

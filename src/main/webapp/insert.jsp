@@ -8,6 +8,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel='stylesheet' type='text/css' href='style.css'>
+<script>
+	function check_val() {
+		var amount = document.frm.amount.value;
+		if (amount == ''){
+			alert('판매수량이 올바르지 않습니다.');
+			frm.amount.focus();
+			return false;
+		} else if (amount <= 0){
+			alert('판매수량이 올바르지 않습니다.');
+			frm.amount.focus();
+			return false;
+		}
+		alert('매출등록이 완료되었습니다.');
+		return true;
+		
+	}
+</script>
 </head>
 <body>
 <h2>도서 매출 등록</h2>
@@ -51,7 +68,7 @@
 	</tr>
 	<tr>
 		<td>판매수량</td>
-		<td><input type="text" name="amount" id="amount"></td>
+		<td><input type="text" name="amount" id="amount" value=''></td>
 	</tr>
 	<tr>
 		<td colspan=2>
@@ -60,5 +77,8 @@
 	</tr>
 </table>
 </form>
+<script>
+	document.forms['frm'].onsubmit = check_val;
+</script>
 </body>
 </html>
