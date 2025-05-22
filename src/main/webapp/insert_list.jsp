@@ -11,17 +11,16 @@
 <body>
 <h2>도서 매출 조회</h2>
 <%
-	request.setCharacterEncoding("UTF-8");
 	Connection conn = Util.getConnection();
 	Statement stmt = conn.createStatement();
+
 	String sql = "SELECT " +
-				 " s.salecode AS orgCode, " + 
-			     " '2019' || TO_CHAR(s.salecode, 'FM0000') AS 전표번호, " +
-			     " TO_CHAR(s.saledate, 'YYYY-MM-DD') AS 판매일자, " +
-			     " b.bcode AS 도서코드, " +
-			     " b.bname AS 도서명, " +
-			     " TO_CHAR(b.price, 'FM999,999,999') AS 도서가격, " +
-			     " s.amount AS 판매수량 " +
+	    	     " s.salecode AS salecode_raw, " +
+			     " '2019' || TO_CHAR(s.salecode, 'FM0000') AS salecode, " +
+			     " TO_CHAR(s.saledate, 'YYYY-MM-DD') AS saledate, " +
+			     " b.bname AS bname, " +
+			     " TO_CHAR(b.price, 'FM999,999,999') AS price, " +
+			     " s.amount AS amount " +
 			     " FROM sale_tbl s " +
 			     " JOIN book_tbl b ON s.bcode = b.bcode " +
 			     " ORDER BY s.salecode";
@@ -36,15 +35,20 @@
 		<th>판매수량</th>
 	</tr>
 <%
-	while(rs.next()){ %>
+	while(rs.next()) {
+%>
 	<tr>
-		<td><a href="modify.jsp?mod_salecode=<%=rs.getString("orgCode")%>"><%=rs.getString("전표번호") %></a></td>
-		<td><%=rs.getString("도서명") %></td>
-		<td><%=rs.getString("판매일자") %></td>
-		<td><%=rs.getString("도서가격") %></td>
-		<td><%=rs.getString("판매수량") %></td>
-<%		
-	
+		<td>
+			<a href="modify.jsp?salecode=<%= rs.getInt("salecode_raw") %>">
+				<%= rs.getString("salecode") %>
+			</a>
+		</td>
+		<td><%= rs.getString("bname") %></td>
+		<td><%= rs.getString("saledate") %></td>
+		<td align="right"><%= rs.getString("price") %></td>
+		<td align="right"><%= rs.getInt("amount") %></td>
+	</tr>
+<%
 	}
 %>
 </table>

@@ -36,8 +36,6 @@ CREATE TABLE sale_tbl(
 	amount number(4)
 )
 
-SELECT * FROM sale_tbl;
-
 INSERT INTO sale_tbl VALUES (0001, '20190101', 'A0001', 4);
 INSERT INTO sale_tbl VALUES (0002, '20190101', 'B0001', 3);
 INSERT INTO sale_tbl VALUES (0003, '20190101', 'B0003', 2);
@@ -101,16 +99,3 @@ SELECT
 				 ORDER BY s.salecode;
 				 
 delete from sale_tbl where salecode => 11;
-
-SELECT 
-				 s.salecode AS orgCode,
-			     '2019' || TO_CHAR(s.salecode, 'FM0000') AS 전표번호, 
-			     TO_CHAR(s.saledate, 'YYYY-MM-DD') AS 판매일자, 
-			     b.bname AS 도서명, 
-			     TO_CHAR(b.price, 'FM999,999,999') AS 도서가격, 
-			     s.amount AS 판매수량 
-			     FROM sale_tbl s 
-			     JOIN book_tbl b ON s.bcode = b.bcode 
-			     ORDER BY s.salecode;
-			     
-SELECT * FROM sale_tbl WHERE salecode = 1;
