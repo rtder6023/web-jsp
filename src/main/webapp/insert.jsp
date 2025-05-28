@@ -42,7 +42,7 @@
 <table border=1>
 	<tr>
 		<td width="150px">전표번호</td>
-		<td width="450px"><input type='text' name='salecode' id='salecode' value='<%=salecode%>' readonly></td>
+		<td width="450px"><input type='text' name='salecode' id='salecode' value='<%=salecode%>'></td>
 	</tr>
 	<tr>
 		<td>판매일자</td>

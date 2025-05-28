@@ -11,8 +11,9 @@
 	String amount = request.getParameter("amount");
 
 	String sql = " UPDATE sale_tbl SET " +
-				 " bcode =  '" + bcode + "', " + 
-				 " amount = '" + amount + "' " +
+				 " saledate 	  = '" + saledate + "', " +
+				 " bcode 		  = '" + bcode 	  + "', " + 
+				 " amount 		  = '" + amount   + "' " +
 				 " WHERE salecode =  " + salecode;
 	stmt.executeUpdate(sql);
 	response.sendRedirect("insert_list.jsp");

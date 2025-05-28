@@ -6,8 +6,10 @@
 	Connection conn = Util.getConnection();
 	Statement stmt = conn.createStatement();
 	String salecode = request.getParameter("mod_salecode");
-	ResultSet rs1 = stmt.executeQuery(" SELECT * FROM sale_tbl WHERE salecode =" + salecode);
-	rs1.next();
+	String sql = " SELECT * FROM sale_tbl WHERE salecode =" + salecode;
+	ResultSet rs = stmt.executeQuery(sql);
+	rs.next();
+	String amount =rs.getString("amount");
 %>
 <!DOCTYPE html>
 <html>
@@ -38,35 +40,34 @@ function check_val() {
 	<table border="1">
 		<tr>
 			<td width="150px">전표번호</td>
-			<td width="450px"><input name='salecode' id='salecode' value='<%= rs1.getInt("salecode") %>' readonly></td>
+			<td width="450px"><input name='salecode' id='salecode' value='<%= rs.getInt("salecode") %>'></td>
 		</tr>
 		<tr>
 			<td>판매일자</td>
-			<td><input name='saledate' id='saledate' value='<%= rs1.getString("saledate") %>'></td>
-		</tr>
-		<tr>
-			<td>판매수량</td>
-			<td><input name='amount' id='amount' value='<%= rs1.getString("amount")%>'></td>
+			<td><input name='saledate' id='saledate' value='<%= rs.getDate("saledate") %>'></td>
 		</tr>
 		<tr>
 			<td>신청도서</td>
 			<td>
 				<select name="bcode">
 				<%
-				String sql = " SELECT	bcode " +
+				sql = " SELECT	bcode " +
 						 " ,		bname " +
 						 " FROM     book_tbl ";
-				ResultSet rs2 = stmt.executeQuery(sql);
-					while(rs2.next()) {
+				rs = stmt.executeQuery(sql);
+					while(rs.next()) {
 				%>
-					<option value='<%= rs2.getString("bcode") %>' ><%= rs2.getString("bname") %></option>
+					<option value='<%= rs.getString("bcode") %>' selected><%= rs.getString("bname") %></option>
 				<%
 					}
 				%>
 				</select>
 			</td>
 		</tr>
-		
+		<tr>
+			<td>판매수량</td>
+			<td><input name='amount' id='amount' value='<%= amount %>'></td>
+		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="수정 완료"></td>
 		</tr>
